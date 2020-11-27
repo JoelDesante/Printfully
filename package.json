@@ -1,12 +1,12 @@
 {
   "name": "printfully",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "A Node.Js library for using Printful's API.",
   "main": "index.js",
   "scripts": {
     "build": "npx tsc",
     "test": "npx jest",
-    "docs": "npx documentation build index.ts --parse-extension ts -f html -o docs"
+    "docs": "npx documentation build lib/** --parse-extension ts -f html -o docs"
   },
   "repository": {
     "type": "git",
