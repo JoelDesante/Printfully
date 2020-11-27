@@ -1,11 +1,11 @@
+/**
+ * Represents an API Key from Printful.
+ * @param {string} apiKey
+ */
 export default class Token {
 
     private readonly apiKey: string;
 
-    /**
-     * Represents an API Key from Printful.
-     * @param {string} apiKey
-     */
     constructor(apiKey: string) {
         this.apiKey = apiKey;
     }
