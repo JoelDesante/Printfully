@@ -1,5 +1,7 @@
 import Token from "./authentication/Token";
-import Store from "./definitions/Store";
+import Store, {StoreData} from "./definitions/Store";
+import Requests from "./Requests";
+import config from "../config";
 
 /**
  * Represents the Printful API.
@@ -24,9 +26,18 @@ export default class Printfully {
     }
 
     /**
-     * @returns {Store} Populated with data from Printful.
+     * Requests store information from Printful.
+     * @returns {Promise<Store>}
      */
-    public getStore(): Store {
-        return new Store();     // TODO: Build store from factory or something...
+    public fetchStore(): Promise<Store> {
+        return new Promise<Store>((resolve, reject) => {
+            Requests.getJSON(config.endpoints.store, this.token)
+                .then((response) => {
+                    resolve(new Store(this.token, response as StoreData));
+                })
+                .catch(err => {
+                    reject(err);
+                });
+        });
     }
 }

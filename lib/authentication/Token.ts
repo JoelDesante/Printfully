@@ -10,6 +10,10 @@ export default class Token {
         this.apiKey = apiKey;
     }
 
+    public getKey() {
+        return this.apiKey;
+    }
+
     public getAuthKey(): string {
         const b = Buffer.from(this.apiKey);
         return b.toString('base64');
