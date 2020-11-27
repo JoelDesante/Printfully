@@ -1,0 +1,25 @@
+{
+  "name": "printfully",
+  "version": "0.0.0",
+  "description": "A Node.Js library for using Printful's API.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JoelDesante/Printfully.git"
+  },
+  "keywords": [
+    "Printful",
+    "API",
+    "Wrapper",
+    "Promise"
+  ],
+  "author": "Joel DeSante",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/JoelDesante/Printfully/issues"
+  },
+  "homepage": "https://github.com/JoelDesante/Printfully#readme"
+}
