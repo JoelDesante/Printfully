@@ -1,6 +1,6 @@
 {
   "name": "printfully",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "A Node.Js library for using Printful's API.",
   "main": "index.js",
   "scripts": {
