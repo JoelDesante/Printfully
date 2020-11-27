@@ -1,6 +1,10 @@
 export class Printfully {
 
-    constructor() {
+    constructor(apiKey) {
 
+    }
+
+    getAuthKey() {
+        return undefined;
     }
 }
