@@ -10,7 +10,9 @@ export default class Requests {
             username: tokenComponents.username,
             password: tokenComponents.password,
             responseType: 'json',
-            retry: 3
+            resolveBodyOnly: true,
+            retry: 3,
+            parseJson: text => JSON.parse(text)
         });
     }
 

@@ -3,32 +3,9 @@
  * @param {Token} token The API Key for Printful
  */
 import Token from "../authentication/Token";
-
-/**
- * Represents the expected data to be received from
- * id {number}
- * name {string}
- * type {string}
- * website {URL}
- * return_address {string|null}
- * billing_address {string|null}
- * currency {string}
- * payment_card {CardInfo|null}
- * packing_slip {PackingSlip}
- * created {number}
- */
-export interface StoreData {
-    id: number,
-    name: string,
-    type: string,
-    website: URL,
-    return_address: string|null,
-    billing_address: string|null,
-    currency: string,
-    payment_card: CardInfo|null,
-    packing_slip: PackingSlip,
-    created: number
-}
+import BaseDefinition from "./BaseDefinition";
+import Requests from "../Requests";
+import Product from "./product/Product";
 
 /**
  * @property email {string|null} Customer service email address
@@ -54,15 +31,42 @@ export interface CardInfo {
 
 /**
  * @param {Token} token The API Key for making requests
- * @param {StoreData} data The data for the store, presumably received from the Printful API
+ * @param {Object} data The data for the store, presumably received from the Printful API
  */
-export default class Store {
+export default class Store extends BaseDefinition{
 
-    private readonly token: Token;
-    public readonly data: Object;
+    public id: number|undefined;
+    public name: string|undefined;
+    public type: string|undefined;
+    public website: string|undefined;
+    public return_address: string|null|undefined;
+    public billing_address: string|null|undefined;
+    public currency: string|undefined;
+    public payment_card: CardInfo|null|undefined;
+    public packing_slip: PackingSlip|undefined;
+    public created: number|undefined;
 
     constructor(token: Token, data: Object) {
-        this.token = token;
-        this.data = data;
+        super(token);
+        Object.assign(this, data);
+    }
+
+    fetchProducts(): Promise<Array<Product>> {
+        return new Promise<Array<Product>>((resolve, reject) => {
+            const request = Requests.create(this.token);
+            // FIXME: Make this paginate
+            request('store/products').json().then(response => {
+                // @ts-ignore
+                const data = response.result as Array<Object>;
+                let products = new Array<Product>();
+
+                // Process each object and convert to tangible Product objects
+                data.forEach(productData => {
+                    products.push(new Product(this.token, productData))
+                });
+
+                resolve(products);
+            });
+        });
     }
 }
