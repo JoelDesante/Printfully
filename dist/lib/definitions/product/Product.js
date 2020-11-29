@@ -1,24 +1,11 @@
 "use strict";
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = function (d, b) {
-        extendStatics = Object.setPrototypeOf ||
-            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
-        return extendStatics(d, b);
-    };
-    return function (d, b) {
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var BaseDefinition_1 = __importDefault(require("../BaseDefinition"));
-var Requests_1 = __importDefault(require("../../Requests"));
-var Variant_1 = __importDefault(require("./Variant"));
+const BaseDefinition_1 = __importDefault(require("../BaseDefinition"));
+const Requests_1 = __importDefault(require("../../Requests"));
+const Variant_1 = __importDefault(require("./Variant"));
 /**
  * Represents the overall Product.
  * @param {Token} token The API Key for making requests
@@ -31,36 +18,32 @@ var Variant_1 = __importDefault(require("./Variant"));
  * @public {number|undefined} synced
  * @public {string|undefined} thumbnail_url
  */
-var Product = /** @class */ (function (_super) {
-    __extends(Product, _super);
-    function Product(token, data) {
-        var _this = _super.call(this, token) || this;
-        Object.assign(_this, data);
-        return _this;
+class Product extends BaseDefinition_1.default {
+    constructor(token, data) {
+        super(token);
+        Object.assign(this, data);
     }
-    Product.prototype.fetchVariants = function () {
-        var _this = this;
-        return new Promise(function (resolve, reject) {
-            var request = Requests_1.default.create(_this.token);
+    fetchVariants() {
+        return new Promise((resolve, reject) => {
+            const request = Requests_1.default.create(this.token);
             // FIXME: Make this paginate
-            if (_this.id === undefined)
+            if (this.id === undefined)
                 throw new TypeError('Product id must be defined to fetch variants.');
-            request("store/products/" + _this.id).json()
-                .then(function (response) {
+            request(`store/products/${this.id}`).json()
+                .then(response => {
                 // @ts-ignore
-                var data = response.result.sync_variants;
-                var variants = new Array();
+                const data = response.result.sync_variants;
+                let variants = new Array();
                 // Process each object and convert to tangible Product objects
-                data.forEach(function (variantData) {
-                    variants.push(new Variant_1.default(_this.token, variantData));
+                data.forEach((variantData) => {
+                    variants.push(new Variant_1.default(this.token, variantData));
                 });
                 resolve(variants);
             })
-                .catch(function (err) {
+                .catch(err => {
                 reject(err);
             });
         });
-    };
-    return Product;
-}(BaseDefinition_1.default));
+    }
+}
 exports.default = Product;

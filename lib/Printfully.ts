@@ -53,7 +53,7 @@ export default class Printfully {
             request(`store/products/${productId}`).json()
                 .then(response => {
                     // @ts-ignore
-                    resolve(new Product(this.token, response.data.sync_product));
+                    resolve(new Product(this.token, response.result.sync_product));
                 })
                 .catch(err => {
                     reject(err);
