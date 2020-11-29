@@ -2,7 +2,6 @@ import Token from "./authentication/Token";
 import Store from "./definitions/Store";
 import Requests from "./Requests";
 import Product from "./definitions/product/Product";
-import {isResponseOk} from "got/dist/source/core/utils/is-response-ok";
 import Variant from "./definitions/product/Variant";
 
 /**
@@ -44,6 +43,7 @@ export default class Printfully {
 
     /**
      * Fetches a product given it's id.
+     *
      * NOTE: This method of fetching data is considerably faster than going down the chain of objects.
      * @param productId
      */
@@ -63,6 +63,7 @@ export default class Printfully {
 
     /**
      * Fetches a product's variants given it's id.
+     *
      * NOTE: This method of fetching data is considerably faster than going down the chain of objects.
      * @param productId
      */

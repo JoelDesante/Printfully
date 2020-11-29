@@ -1,7 +1,3 @@
-/**
- * Represents a store on Printful.
- * @param {Token} token The API Key for Printful
- */
 import Token from "../authentication/Token";
 import BaseDefinition from "./BaseDefinition";
 import Requests from "../Requests";
@@ -30,6 +26,7 @@ export interface CardInfo {
 }
 
 /**
+ * Represents a store on Printful.
  * @param {Token} token The API Key for making requests
  * @param {Object} data The data for the store, presumably received from the Printful API
  */
@@ -51,6 +48,10 @@ export default class Store extends BaseDefinition{
         Object.assign(this, data);
     }
 
+    /**
+     * TODO: Implement pagination so that all products will make an appearance.
+     * @returns All products (on the first page) of the store
+     */
     fetchProducts(): Promise<Array<Product>> {
         return new Promise<Array<Product>>((resolve, reject) => {
             const request = Requests.create(this.token);
