@@ -31,13 +31,10 @@ export default class Printfully {
      */
     public fetchStore(): Promise<Store> {
         return new Promise<Store>((resolve, reject) => {
-            Requests.getJSON(config.endpoints.store, this.token)
-                .then((response) => {
-                    resolve(new Store(this.token, response as StoreData));
-                })
-                .catch(err => {
-                    reject(err);
-                });
+            const request = Requests.create(this.token);
+            request('store').then(response => {
+                console.log(response);
+            });
         });
     }
 }

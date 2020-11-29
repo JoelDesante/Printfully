@@ -2,15 +2,14 @@ import Requests from "../lib/Requests";
 import Token from "../lib/authentication/Token";
 import config from '../config';
 import Printfully from "../lib/Printfully";
+import ApiKeys from "../ApiKeys";
 
-test('Requests#getJSON returns object', () => {
-    expect(typeof Requests.getJSON('', new Token(config.api_testKey))).toBe('object');
+test('Requests#create returns object', () => {
+    expect(typeof Requests.create(new Token(config.api_testKey))).toBe('function');
 });
 
-test('Requests#postJSON returns object', () => {
-    expect(typeof Requests.postJSON('', new Token(config.api_testKey))).toBe('object');
-});
-
-test('Store Request', () => {
-    new Printfully(new Token(''));
+test('Store Information Request', async (done) => {
+    let Printful = new Printfully(new Token(ApiKeys.printful));
+    await expect(Printful.fetchStore()).resolves.toBeDefined();
+    done();
 });
