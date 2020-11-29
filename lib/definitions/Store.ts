@@ -4,6 +4,19 @@
  */
 import Token from "../authentication/Token";
 
+/**
+ * Represents the expected data to be received from
+ * id {number}
+ * name {string}
+ * type {string}
+ * website {URL}
+ * return_address {string|null}
+ * billing_address {string|null}
+ * currency {string}
+ * payment_card {CardInfo|null}
+ * packing_slip {PackingSlip}
+ * created {number}
+ */
 export interface StoreData {
     id: number,
     name: string,
@@ -39,83 +52,17 @@ export interface CardInfo {
     expires: string
 }
 
+/**
+ * @param {Token} token The API Key for making requests
+ * @param {StoreData} data The data for the store, presumably received from the Printful API
+ */
 export default class Store {
 
     private readonly token: Token;
-    private readonly data: StoreData;
+    public readonly data: Object;
 
-    constructor(token: Token, data: StoreData) {
+    constructor(token: Token, data: Object) {
         this.token = token;
         this.data = data;
-    }
-
-    /**
-     * @return {number} ID of the Printful store.
-     */
-    public getId(): number {
-        return this.data.id;
-    }
-
-    /**
-     * @return {string} Name of the Printful store.
-     */
-    public getName(): string {
-        return this.data.name;
-    }
-
-    /**
-     * @return {string} Type of Printful store.
-     */
-    public getType(): string {
-        return this.data.type;
-    }
-
-    /**
-     * @return {URL} URL of the website linked to the Printful store.
-     */
-    public getWebsiteUrl(): URL {
-        return this.data.website;
-    }
-
-    /**
-     * @return {string|null} The return shipping address configured for the Printful store.
-     */
-    public getReturnAddress(): string|null {
-        return this.data.return_address;
-    }
-
-    /**
-     * @return {string|null} The billing address configured for the Printful store.
-     */
-    public getBillingAddress(): string|null {
-        return this.data.billing_address;
-    }
-
-    /**
-     * @return {string} Type of currency used in this Printful store.
-     */
-    public getCurrency(): string {
-        return this.data.currency;
-    }
-
-    /**
-     * @return {string|null} Configured payment card for this Printful store.
-     */
-    public getPaymentCard(): CardInfo|null{
-        return this.data.payment_card;
-    }
-
-    /**
-     * @return {PackingSlip} Packing slip data.
-     */
-    public getPackingSlip(): PackingSlip {
-        return this.data.packing_slip
-    }
-
-    /**
-     * @return {number} The time when this store was created (defiend in seconds since .
-     */
-    public getTimeCreated(): number {
-        return this.data.created;
     }
 }
