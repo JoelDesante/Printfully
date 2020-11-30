@@ -1,5 +1,5 @@
 import Token, {TokenComponents} from "./authentication/Token";
-import config from "../config";
+import config from "../config/config";
 import got, {Got} from "got";
 
 export default class Requests {

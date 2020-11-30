@@ -8,7 +8,7 @@ import Variant from "./definitions/product/Variant";
  * Represents the Printful API.
  * @param {string|Token} token The secret API Key for your Printful shop.
  */
-export default class Printfully {
+export class Printfully {
 
     private readonly token: Token;
 

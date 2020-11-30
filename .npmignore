@@ -2,6 +2,7 @@
 node_modules
 tests
 docs
+config
 
 ApiKeys.ts
 ApiKeys.template.ts

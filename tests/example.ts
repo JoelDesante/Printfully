@@ -1,5 +1,5 @@
 import Printfully from "../lib/Printfully";
-import ApiKeys from "../ApiKeys";
+import ApiKeys from "../config/ApiKeys";
 
 let run = async () => {
     const p = new Printfully(ApiKeys.printful);
