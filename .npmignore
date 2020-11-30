@@ -1,9 +1,0 @@
-.idea
-node_modules
-tests
-docs
-config
-
-ApiKeys.ts
-ApiKeys.template.ts
-jest.config.ts
